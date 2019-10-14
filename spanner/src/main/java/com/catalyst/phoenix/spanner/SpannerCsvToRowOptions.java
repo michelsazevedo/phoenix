@@ -1,0 +1,27 @@
+package com.catalyst.phoenix.spanner;
+
+import org.apache.beam.sdk.options.Description;
+import org.apache.beam.sdk.options.PipelineOptions;
+import org.apache.beam.sdk.options.Validation;
+
+public interface SpannerCsvToRowOptions  extends PipelineOptions {
+    @Description("Input Origin")
+    @Validation.Required
+    String getInput();
+    void setInput(String value);
+
+    @Description("Spanner Instance")
+    @Validation.Required
+    String getInstanceId();
+    void setInstanceId(String value);
+
+    @Description("Spanner Table")
+    @Validation.Required
+    String getTable();
+    void setTable(String value);
+
+    @Description("Spanner Database")
+    @Validation.Required
+    String getDatabaseId();
+    void setDatabaseId(String value);
+}

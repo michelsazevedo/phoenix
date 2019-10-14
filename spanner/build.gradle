@@ -1,0 +1,30 @@
+plugins {
+    id("java")
+    id("application")
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile project(":common")
+    implementation("com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:2.5.0")
+    implementation("com.google.cloud:google-cloud-spanner:1.41.0")
+}
+
+ext {
+    spannerCsvClass = "com.catalyst.phoenix.spanner.SpannerCsvToRow"
+}
+
+application {
+    mainClassName = spannerCsvClass
+    applicationDefaultJvmArgs = [
+        "-Drunner=dataflow"
+    ]
+}
+
+task spannerCsvToRow(type: JavaExec) {
+    description = "run migration from csv to spanner row"
+    classpath = sourceSets.main.runtimeClasspath
+    main = spannerCsvClass
+}

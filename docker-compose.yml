@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  test: &base
+    image: phoenix-test
+    build: .
+    volumes:
+      - .:/phoenix
+    command: gradle test
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/phoenix/gcloud-credentials.json
+      - PROJECT=rdsm-analytics-development
+
+  app:
+    <<: *base
+    command: bash -c 'gradle run spannerCsvToRow'
