@@ -1,10 +1,12 @@
 package com.catalyst.phoenix.spanner;
 
+import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
 import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.Validation;
 
-public interface SpannerCsvToRowOptions  extends PipelineOptions {
+public interface SpannerCsvToRowOptions extends DataflowPipelineOptions {
+
     @Description("Input Origin")
     @Validation.Required
     String getInput();

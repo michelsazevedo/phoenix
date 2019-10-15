@@ -5,8 +5,11 @@ plugins {
 dependencies {
     implementation("org.apache.beam:beam-sdks-java-core:2.16.0")
     implementation("org.apache.beam:beam-runners-direct-java:2.16.0")
+    implementation("org.apache.beam:beam-runners-google-cloud-dataflow-java:2.16.0")
+    implementation("com.google.cloud:google-cloud-storage:1.96.0")
 
-    implementation("com.google.guava:guava:22.0")
+    implementation("com.google.guava:guava:23.0")
+    implementation("com.google.protobuf:protobuf-java:3.10.0")
 
     runtime("org.slf4j:slf4j-jdk14:1.7.25")
     

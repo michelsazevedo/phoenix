@@ -9,7 +9,7 @@ public class OpportunityMutation extends DoFn<Opportunity, Mutation> {
     public void processElement(ProcessContext context) {
         Opportunity opportunity =  context.element();
 
-        Mutation opportunityMutation = Mutation.newInsertOrUpdateBuilder("opportunities")
+        Mutation opportunityMutation = Mutation.newInsertOrUpdateBuilder("Opportunities")
                 .set("TenantId").to(opportunity.getTenantId())
                 .set("WorkflowId").to(opportunity.getWorkflowId())
                 .set("EventDate").to(opportunity.getEventDate())

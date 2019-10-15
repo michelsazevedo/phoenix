@@ -9,13 +9,13 @@ import org.apache.beam.sdk.coders.DefaultCoder;
 
 @DefaultCoder(AvroCoder.class)
 public class Opportunity {
-    private Integer TenantId;
+    private String TenantId;
     private String WorkflowId;
     private String EventDate;
-    private Integer LeadId;
-    private Integer Attribution;
+    private String LeadId;
+    private String Attribution;
 
-    public Opportunity(Integer TenantId, String WorkflowId, String EventDate, Integer LeadId, Integer Attribution) {
+    public Opportunity(String TenantId, String WorkflowId, String EventDate, String LeadId, String Attribution) {
         this.TenantId = TenantId;
         this.WorkflowId = WorkflowId;
         this.EventDate = EventDate;
@@ -23,11 +23,11 @@ public class Opportunity {
         this.Attribution = Attribution;
     }
 
-    public Integer getTenantId() {
+    public String getTenantId() {
         return TenantId;
     }
 
-    public void setTenantId(int TenantId) {
+    public void setTenantId(String TenantId) {
         this.TenantId = TenantId;
     }
 
@@ -47,19 +47,19 @@ public class Opportunity {
         this.EventDate = EventDate;
     }
 
-    public Integer getLeadId() {
+    public String getLeadId() {
         return LeadId;
     }
 
-    public void setLeadId(int LeadId) {
+    public void setLeadId(String LeadId) {
         this.LeadId = LeadId;
     }
 
-    public Integer getAttribution() {
+    public String getAttribution() {
         return Attribution;
     }
 
-    public void setAttribution(int Attribution) {
+    public void setAttribution(String Attribution) {
         this.Attribution = Attribution;
     }
 }

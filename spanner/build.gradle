@@ -19,7 +19,7 @@ ext {
 application {
     mainClassName = spannerCsvClass
     applicationDefaultJvmArgs = [
-        "-Drunner=dataflow"
+        "-Drunner=DataflowRunner"
     ]
 }
 

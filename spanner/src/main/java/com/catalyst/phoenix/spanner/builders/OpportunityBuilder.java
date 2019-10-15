@@ -3,6 +3,7 @@ package com.catalyst.phoenix.spanner.builders;
 import com.catalyst.phoenix.common.util.SplitToCollection;
 import com.catalyst.phoenix.spanner.models.Opportunity;
 import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,21 +16,24 @@ public class OpportunityBuilder extends DoFn<String, Opportunity> {
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(OpportunityBuilder.class);
 
-    @DoFn.ProcessElement
-    public void processElement(DoFn.ProcessContext context) throws Exception {
-        SplitToCollection row = new SplitToCollection((String) context.element());
+    @ProcessElement
+    public void processElement(ProcessContext c) {
+        String line = c.element();
+
+        SplitToCollection row = new SplitToCollection((String) line);
+
         List<String> columns = new ArrayList<>(Arrays.asList("TenantId", "WorkflowId", "LeadId", "Attribution", "EventDate"));
 
         Map<?, ?> params =  row.toMap(columns);
 
         LOG.info("Row ~>" + row);
 
-        context.output(new Opportunity(
-                (Integer) params.get("TenantId"),
+        c.output(new Opportunity(
+                (String) params.get("TenantId"),
                 (String) params.get("WorkflowId"),
                 (String) params.get("EventDate"),
-                (Integer) params.get("LeadId"),
-                (Integer) params.get("Attribution")
+                (String) params.get("LeadId"),
+                (String) params.get("Attribution")
         ));
     }
 }
