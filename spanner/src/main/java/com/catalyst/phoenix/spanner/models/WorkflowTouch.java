@@ -1,21 +1,19 @@
 package com.catalyst.phoenix.spanner.models;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-
-
+import com.google.cloud.Timestamp;
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 
 @DefaultCoder(AvroCoder.class)
-public class Opportunity {
-    private String TenantId;
+public class WorkflowTouch {
+    private long TenantId;
     private String WorkflowId;
-    private String EventDate;
-    private String LeadId;
+    private Date EventDate;
+    private long LeadId;
     private String Attribution;
 
-    public Opportunity(String TenantId, String WorkflowId, String EventDate, String LeadId, String Attribution) {
+    public WorkflowTouch(long TenantId, String WorkflowId, Date EventDate, long LeadId, String Attribution) {
         this.TenantId = TenantId;
         this.WorkflowId = WorkflowId;
         this.EventDate = EventDate;
@@ -23,11 +21,11 @@ public class Opportunity {
         this.Attribution = Attribution;
     }
 
-    public String getTenantId() {
+    public long getTenantId() {
         return TenantId;
     }
 
-    public void setTenantId(String TenantId) {
+    public void setTenantId(long TenantId) {
         this.TenantId = TenantId;
     }
 
@@ -39,19 +37,19 @@ public class Opportunity {
         this.WorkflowId = WorkflowId;
     }
 
-    public String getEventDate() {
-        return EventDate;
+    public Timestamp getEventDate() {
+        return Timestamp.of(EventDate);
     }
 
-    public void setEventDate(String EventDate) {
+    public void setEventDate(Date EventDate) {
         this.EventDate = EventDate;
     }
 
-    public String getLeadId() {
+    public long getLeadId() {
         return LeadId;
     }
 
-    public void setLeadId(String LeadId) {
+    public void setLeadId(long LeadId) {
         this.LeadId = LeadId;
     }
 

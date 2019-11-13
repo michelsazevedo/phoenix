@@ -10,6 +10,7 @@ dependencies {
     compile project(":common")
     implementation("com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:2.5.0")
     implementation("com.google.cloud:google-cloud-spanner:1.41.0")
+    implementation("org.json:json:20190722")
 }
 
 ext {
