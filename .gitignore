@@ -3,6 +3,7 @@
 gradle
 .idea
 gcloud-credentials.json
+gcloud-account-key.json
 
 # Ignore Gradle build output directory
 build
