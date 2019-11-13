@@ -1,7 +1,6 @@
 package com.catalyst.phoenix.spanner;
 
 import com.catalyst.phoenix.spanner.builders.WorkflowTouchBuilder;
-import com.catalyst.phoenix.spanner.mutations.WorkflowTouchMutation;
 import com.catalyst.phoenix.spanner.mutations.WorkflowsTouchMutation;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
