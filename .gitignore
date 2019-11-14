@@ -7,4 +7,10 @@ gcloud-credentials.json
 # Ignore Gradle build output directory
 build
 
+common/.settings/*
+common/bin/*
 
+spanner/.settings/*
+spanner/bin/*
+
+gcloud-account-key.json
