@@ -7,14 +7,14 @@ import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 
 @DefaultCoder(AvroCoder.class)
-public class Opportunity {
+public class WorkflowTouch {
     private long TenantId;
     private String WorkflowId;
     private Date EventDate;
     private long LeadId;
     private String Attribution;
 
-    public Opportunity(long TenantId, String WorkflowId, Date EventDate, long LeadId, String Attribution) {
+    public WorkflowTouch(long TenantId, String WorkflowId, Date EventDate, long LeadId, String Attribution) {
         this.TenantId = TenantId;
         this.WorkflowId = WorkflowId;
         this.EventDate = EventDate;

@@ -1,9 +1,8 @@
 package com.catalyst.phoenix.spanner.builders;
 
 import com.catalyst.phoenix.common.util.SplitToCollection;
-import com.catalyst.phoenix.spanner.models.Opportunity;
+import com.catalyst.phoenix.spanner.models.WorkflowTouch;
 import org.apache.beam.sdk.transforms.DoFn;
-import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +10,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class OpportunityBuilder extends DoFn<String, Opportunity> {
+public class WorkflowTouchBuilder extends DoFn<String, WorkflowTouch> {
     private static final long serialVersionUID = 1L;
-    private static final Logger LOG = LoggerFactory.getLogger(OpportunityBuilder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorkflowTouchBuilder.class);
 
     @ProcessElement
     public void processElement(ProcessContext c) throws ParseException {
@@ -27,7 +26,7 @@ public class OpportunityBuilder extends DoFn<String, Opportunity> {
 
         LOG.info("Row ~>" + row);
 
-        c.output(new Opportunity(
+        c.output(new WorkflowTouch(
                 Long.parseLong((String) params.get("TenantId")),
                 (String) params.get("WorkflowId"),
                 getWorkflowDate((String) params.get("EventDate")),
@@ -36,9 +35,13 @@ public class OpportunityBuilder extends DoFn<String, Opportunity> {
         ));
     }
 
-    private Date getWorkflowDate(String date) throws ParseException {
+    private Date getWorkflowDate(String workflowDate) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return format.parse(date);
+
+        String date = workflowDate.substring(0, 10);
+        String time = workflowDate.substring(11, 23);
+
+        return format.parse(date + " " + time + " UTC");
     }
 
     private String getAttribution(String attribution) {

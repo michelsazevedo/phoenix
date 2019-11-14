@@ -1,13 +1,13 @@
 package com.catalyst.phoenix.spanner.mutations;
 
-import com.catalyst.phoenix.spanner.models.Opportunity;
+import com.catalyst.phoenix.spanner.models.WorkflowTouch;
 import com.google.cloud.spanner.Mutation;
 import org.apache.beam.sdk.transforms.DoFn;
 
-public class OpportunityMutation extends DoFn<Opportunity, Mutation> {
+public class WorkflowTouchMutation extends DoFn<WorkflowTouch, Mutation> {
     @ProcessElement
     public void processElement(ProcessContext context) {
-        Opportunity opportunity =  context.element();
+        WorkflowTouch opportunity =  context.element();
 
         Mutation opportunityMutation = Mutation.newInsertOrUpdateBuilder("Opportunities")
                 .set("TenantId").to(opportunity.getTenantId())
