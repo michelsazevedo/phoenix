@@ -7,17 +7,16 @@ import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class OpportunityBuilder extends DoFn<String, Opportunity> {
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(OpportunityBuilder.class);
 
     @ProcessElement
-    public void processElement(ProcessContext c) {
+    public void processElement(ProcessContext c) throws ParseException {
         String line = c.element();
 
         SplitToCollection row = new SplitToCollection((String) line);
@@ -29,11 +28,20 @@ public class OpportunityBuilder extends DoFn<String, Opportunity> {
         LOG.info("Row ~>" + row);
 
         c.output(new Opportunity(
-                (String) params.get("TenantId"),
+                Long.parseLong((String) params.get("TenantId")),
                 (String) params.get("WorkflowId"),
-                (String) params.get("EventDate"),
-                (String) params.get("LeadId"),
-                (String) params.get("Attribution")
+                getWorkflowDate((String) params.get("EventDate")),
+                Long.parseLong((String) params.get("LeadId")),
+                getAttribution((String) params.get("Attribution"))
         ));
+    }
+
+    private Date getWorkflowDate(String date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.parse(date);
+    }
+
+    private String getAttribution(String attribution) {
+        return Integer.parseInt(attribution) == 0 ? "first" : "last";
     }
 }
