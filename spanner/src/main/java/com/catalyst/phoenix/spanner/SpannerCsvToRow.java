@@ -24,6 +24,7 @@ public class SpannerCsvToRow {
                         .withInstanceId(options.getInstanceId())
                         .withDatabaseId(options.getDatabaseId())
                 );
-        pipeline.run().waitUntilFinish();
+
+        pipeline.run();
     }
 }
