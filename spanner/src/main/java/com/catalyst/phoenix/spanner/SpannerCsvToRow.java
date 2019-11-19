@@ -9,6 +9,9 @@ import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.*;
 
 public class SpannerCsvToRow {
+    public final String hello() {
+        return "Hello World!";
+    }
     public static void main(String[] args) {
         SpannerCsvToRowOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().as(SpannerCsvToRowOptions.class);
         Pipeline pipeline = Pipeline.create(options);
@@ -21,7 +24,7 @@ public class SpannerCsvToRow {
                             .withInstanceId(options.getInstanceId())
                             .withDatabaseId(options.getDatabaseId())
                             .grouped());
-         
+
         pipeline.run();
     }
 }
