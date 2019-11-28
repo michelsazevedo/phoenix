@@ -19,7 +19,7 @@ public class SpannerCsvToRow {
 
         pipeline.apply("read lines", TextIO.read().from(options.getInput()))
                 .apply("load entities", ParDo.of(new WorkflowTouchBuilder()))
-                .apply("mutation entities", ParDo.of(new WorkflowTouchMutation()))
+                .apply("mutation entities", ParDo.of(new WorkflowTouchMutation(options.getTable())))
                 .apply("write rows", SpannerIO.write()
                         .withInstanceId(options.getInstanceId())
                         .withDatabaseId(options.getDatabaseId())
