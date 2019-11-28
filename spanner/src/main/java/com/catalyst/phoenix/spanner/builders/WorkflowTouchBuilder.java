@@ -43,7 +43,7 @@ public class WorkflowTouchBuilder extends DoFn<String, Map<String, WorkflowTouch
     }
 
     private Date getWorkflowDate(String date) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         return format.parse(date);
     }
 
