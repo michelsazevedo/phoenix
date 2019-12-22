@@ -8,6 +8,7 @@ import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.SimpleFunction;
 import org.apache.beam.sdk.values.PCollection;
 
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -33,10 +34,16 @@ public class WorkflowsTouchMutation extends PTransform<PCollection<Map<String, W
                             .set("EventDate").to(workflow.getEventDate())
                             .set("LeadId").to(workflow.getLeadId())
                             .set("Attribution").to(workflow.getAttribution())
+                            .set("UpdatedAt").to(getCurrentTimestamp())
                             .build());
                 });
                 return MutationGroup.create(mutations.get("last"), mutations.get("first"));
             }
         }));
+    }
+
+    private com.google.cloud.Timestamp getCurrentTimestamp() {
+        Date date = new Date();
+        return com.google.cloud.Timestamp.of(date);
     }
 }
